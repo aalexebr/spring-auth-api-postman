@@ -1,0 +1,36 @@
+<!doctype html>
+<!-- html tag with Thymeleaf -->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- Bootstrap CSS -->
+	<link th:rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.2/css/bootstrap.min.css}"/>
+	<title>photo</title>
+</head>
+	<body>
+		<div class="container">
+			<a th:href="@{/}">home</a>
+			<a sec:authorize="hasAuthority('ADMIN')"
+				th:href="@{/update/photo/{id} (id=${photo.id})}"
+				class="btn btn-primary">edit photo</a>
+			<h1>photo:</h1>
+			<div>
+				[[${photo.title}]]
+			</div>
+				
+			<div style="width: 18rem;">
+				<img th:src="@{${photo.url}}" class="img-fluid">
+			</div>
+			
+			<ul th:if="${photo.categories.size > 0}">
+				<h3>categories:</h3>
+				<li th:each="cat : ${photo.categories}">
+					[[${cat.name}]]
+				</li>
+			</ul>
+			<a th:href="@{/update/photo/{id} (id=${photo.id})}" class="btn btn-success">update</a>
+		</div>
+	</body>
+</html>

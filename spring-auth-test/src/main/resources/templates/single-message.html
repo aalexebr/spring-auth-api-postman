@@ -1,0 +1,33 @@
+<!doctype html>
+<!-- html tag with Thymeleaf -->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- Bootstrap CSS -->
+	<link th:rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.2/css/bootstrap.min.css}"/>
+	<title>messages</title>
+</head>
+<body>
+	<div class="container py-5">
+		<a th:href="@{/home}">home</a>
+		<a th:href="@{/messages}">messages</a>
+		<div>
+			<h2>
+				Object: [[${message.object}]]
+			</h2>
+			<h2>
+				from: [[${message.senderName}]]
+			</h2>
+			<h3>
+				content:
+			</h3>
+			<p>
+				[[${message.content}]]
+			</p>
+		</div>
+	</div>
+
+</body>
+</html>

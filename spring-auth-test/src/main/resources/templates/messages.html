@@ -1,0 +1,61 @@
+<!doctype html>
+<!-- html tag with Thymeleaf -->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- Bootstrap CSS -->
+	<link th:rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.2/css/bootstrap.min.css}"/>
+	<title>messages</title>
+</head>
+<body>
+	<a th:href="@{/}">home</a>
+	<div th:if="${messages.size() == 0}">
+		no messages
+	</div>
+	<div th:if="${messages.size()>0}" class="container p-4">
+		
+		<form>
+		  <div class="mb-3">
+		    <label for="sender" class="form-label">serch by sender</label>
+		    <input th:value="${sender}"
+		    	type="text" name="sender" class="form-control" id="sender" aria-describedby="sender">
+		  </div>
+		  <button type="submit" class="btn btn-primary mb-4">Search</button>
+		</form>
+			
+		<table class="table border">
+			  <thead class="thead-dark">
+			    <tr>
+			      <th scope="col">object</th>
+			      <th scope="col">from</th>
+			      <th scope="col">read?</th>
+			      <th scope="col">view</th>
+			      <th sec:authorize="hasAuthority('ADMIN')"
+			      	scope="col">delete</th>
+			    </tr>
+			  </thead>
+			  <tbody>
+			    <tr th:each="mess : ${messages}">
+			      <th scope="row">[[${mess.object}]]</th>
+			      <td>[[${mess.senderName}]]</td>
+			      <td>[[${mess.read_mess}]]</td>
+			      <td>
+					  <a th:href="@{/message/{id}(id=${mess.id})}">view</a>
+				  </td>
+			      <td sec:authorize="hasAuthority('ADMIN')">
+					  <form 
+						th:action="@{/message/delete/{id}(id=${mess.id})}"
+						method="POST">
+					
+						<button type="submit" class="btn btn-danger">delete</button>	
+					</form>
+				  </td>
+			    </tr>
+			  </tbody>
+			</table>
+	</div>
+
+</body>
+</html>

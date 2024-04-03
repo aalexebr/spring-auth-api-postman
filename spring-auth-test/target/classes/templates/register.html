@@ -1,0 +1,28 @@
+<!doctype html>
+<!-- html tag with Thymeleaf -->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- Bootstrap CSS -->
+	<link th:rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.2/css/bootstrap.min.css}"/>
+	<title>register</title>
+</head>
+<body>
+	<main class="container p-5">
+		<form method="POST" th:object="${user}">
+			<label for="username">username</label>
+			<input type="text" th:field="*{username}">
+			<div th:replace="fragments :: errorDiv('username')" />
+			<br>
+			<label for="username">pswd</label>
+			<input type="password" th:field="*{password}">
+			<div th:replace="fragments :: errorDiv('password')" />
+			<br>
+			<button type="submit">register</button>
+		</form>
+	</main>
+
+</body>
+</html>
